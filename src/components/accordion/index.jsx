@@ -3,14 +3,18 @@ import data from './data';
 import './styles.css';
 
 const Accordion = () => {
-    const [selected, setSelected] = useState(null);
+    const [selected, setSelected] = useState([0,0,0]);
 
     const handleSelection = (getCurrentId) => {
         console.log(getCurrentId);
-        if(getCurrentId === selected){
-            setSelected(null);
+        if(selected[getCurrentId] === 1){
+            let updatedSelected = [...selected];
+            updatedSelected[getCurrentId] = 0
+            setSelected(updatedSelected);
         }else{
-            setSelected(getCurrentId);
+            let updatedSelected = [...selected];
+            updatedSelected[getCurrentId] = 1
+            setSelected(updatedSelected);
         }
     }
 
@@ -29,7 +33,7 @@ const Accordion = () => {
                     </div>
                     <div className="description">
                         {
-                            selected === dataItem.id ? 
+                            selected[dataItem.id] === 1 ? 
                             (<div>
                                 {dataItem.description}
                             </div>) : null
