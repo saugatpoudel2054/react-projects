@@ -4,6 +4,15 @@
     width: 100vw;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    gap: 5%;
+}
+
+.wrapper button {
+    padding: 20px;
+    cursor: pointer;
+    background-color: black;
+    color: #fff;
 }
 
 .accordion {
