@@ -26,8 +26,14 @@ const Accordion = () => {
         
     }
 
+    const resetSelection = () => {
+        setEnableMultiSelect(!enableMultiSelect);
+        setSelected([]);
+        setSingleSelectedItem(null);
+    }
+
     return <div className="wrapper">
-        <button type="button" onClick={() => setEnableMultiSelect(!enableMultiSelect)}>
+        <button type="button" onClick={() => resetSelection()}>
             {enableMultiSelect ?  <span>Enable Single Selection</span> : <span>Enable Multi-selection</span>}
         </button>
         <div className="accordion">
@@ -44,15 +50,12 @@ const Accordion = () => {
                     </div>
                     <div className="description">
                         {
-                            enableMultiSelect ?
-                            selected.indexOf(dataItem.id) !== -1 ? 
+                            singleSelectedItem === dataItem.id || selected.indexOf(dataItem.id) !== -1
+                             ? 
                             (<div>
                                 {dataItem.description}
-                            </div>) : null
-                            : singleSelectedItem === dataItem.id ? 
-                            (<div>
-                                {dataItem.description}
-                            </div>) : null
+                            </div>) 
+                            : null
                             
                         }
                     </div>
