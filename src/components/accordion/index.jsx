@@ -3,25 +3,24 @@ import data from './data';
 import './styles.css';
 
 const Accordion = () => {
-    const [selected, setSelected] = useState([0,0,0]);
+    const [selected, setSelected] = useState([]);
     const [enableMultiSelect, setEnableMultiSelect] = useState(false);
     const [singleSelectedItem, setSingleSelectedItem] = useState(null);
 
     const handleSelection = (getCurrentId) => {
         console.log(getCurrentId);
         if(enableMultiSelect){
-            console.log('Multislection enabled');
-            if(selected[getCurrentId] === 1){
-                let updatedSelected = [...selected];
-                updatedSelected[getCurrentId] = 0
-                setSelected(updatedSelected);
+            let updatedSelected = [...selected];
+            let index = updatedSelected.indexOf(getCurrentId);
+            console.log(index);
+            if(index === -1){
+                updatedSelected.push(getCurrentId);
             }else{
-                let updatedSelected = [...selected];
-                updatedSelected[getCurrentId] = 1
-                setSelected(updatedSelected);
+                updatedSelected.splice(index, 1);
             }
+            console.log(updatedSelected);
+            setSelected(updatedSelected);
         }else{
-            console.log('Multislection disabled');
             setSingleSelectedItem(getCurrentId === singleSelectedItem ? null : getCurrentId);
         }
         
@@ -46,7 +45,7 @@ const Accordion = () => {
                     <div className="description">
                         {
                             enableMultiSelect ?
-                            selected[dataItem.id] === 1 ? 
+                            selected.indexOf(dataItem.id) !== -1 ? 
                             (<div>
                                 {dataItem.description}
                             </div>) : null
