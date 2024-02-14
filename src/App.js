@@ -1,9 +1,9 @@
 import './App.css';
-import Accordion from './components/accordion';
+import RandomColor from './components/randomcolor';
 
 function App() {
   return (
-    <Accordion></Accordion>
+    <RandomColor></RandomColor>
   );
 }
 
