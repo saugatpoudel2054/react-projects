@@ -6,26 +6,44 @@ const RandomColor = () => {
     const [color, setColor] = useState('#fff');
     const [mode, setMode] = useState('hex');
 
-    const generateRandomColor = () => {
-        if(mode === 'hex'){
-            let finalResult = '#';
-            for (let index = 0; index < 6; index++) {
-                const element = selection[Math.floor(Math.random()*selection.length)];
-                finalResult += element;
+    const generateRandomColor = (providedMode) => {
+        if(providedMode == null){
+            if(mode === 'hex'){
+                let finalResult = '#';
+                for (let index = 0; index < 6; index++) {
+                    const element = selection[Math.floor(Math.random()*selection.length)];
+                    finalResult += element;
+                }
+                setColor(finalResult);
+            }else{
+                let finalResult = `rgb(${Math.floor(Math.random()*266)},${Math.floor(Math.random()*266)},${Math.floor(Math.random()*266)})`;
+                setColor(finalResult)
             }
-            setColor(finalResult);
         }else{
-            let finalResult = `rgb(${Math.floor(Math.random()*266)},${Math.floor(Math.random()*266)},${Math.floor(Math.random()*266)})`;
-            setColor(finalResult)
+            if(providedMode === 'hex'){
+                let finalResult = '#';
+                for (let index = 0; index < 6; index++) {
+                    const element = selection[Math.floor(Math.random()*selection.length)];
+                    finalResult += element;
+                }
+                setColor(finalResult);
+            }else{
+                let finalResult = `rgb(${Math.floor(Math.random()*266)},${Math.floor(Math.random()*266)},${Math.floor(Math.random()*266)})`;
+                setColor(finalResult)
+            }
         }
         
+        
     }
+
 
     const switchMode = () => {
         if(mode === 'hex'){
             setMode('rgb');
+            generateRandomColor('rgb');
         }else{
             setMode('hex');
+            generateRandomColor('hex');
         }
     }
 
